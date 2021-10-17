@@ -1,0 +1,43 @@
+1.SORT
+
+使用struct：
+Exchange表示交易所，
+quote表示一个quote
+order表示一个order
+
+重载order类的>>操作符，用来方便地读取order.csv
+重载quote类的>>操作符，用来方便地读取order.csv
+
+order类成员函数add_quote():
+读取下一个quote，看看是否可以成交，如果可以成交，则把这个quote加入这个order，否则跳过
+Exchange类成员函数add_quote():
+在某个order被一个quote满足时，这个quote所在的Exchange调用函数add_quote()
+
+SORT 算法的主要流程：
+1.从Orders.csv中读取所有order
+2.从console读取用户手动输入的order
+3.从Quotes.csv中读取所有quote，同时完成各项任务
+4.输出结果
+
+
+
+
+2.iceberg:
+
+使用的struct：
+line：表示从文件iceberg中读取的信息，
+包含有交易的时间，成交量，成交价
+AandP：包含成交量，成交价
+time：表示成交时间，包含小时（h），分钟（m）
+
+主要函数：
+read：从文件iceberg中读取各个时间段的交易信息，共分为105个段，每段4分钟
+这105个时间段储存在一个vector中，从read中返回该vector
+重载类time的+运算符，
+每一个time的对象都有一个函数：mark， 这个数字与time一一对应
+
+算法的主要步骤：
+1.从console读取用户要成交的总量，储存在int amount中；
+2.从文件iceberg.csv中读取所有成交信息，逐个填充105个时间段
+3.计算出每个时间段中成交占总成交量的比例和均价，储存在vector<AandP>中；
+4.根据用户输入的amount输出每个时间段的成交量和均价
